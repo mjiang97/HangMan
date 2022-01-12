@@ -1,4 +1,4 @@
-# HangMan
+# **H**ang**M**an
 By: Hebe Huang and Macy Jiang pd 4
 
 ## Project Description:
