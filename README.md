@@ -1,4 +1,4 @@
-# H&M's Bobaria
+# HangMan
 ## By: Hebe Huang and Macy Jiang pd 4
 
 ## Project Description:
