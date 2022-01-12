@@ -25,6 +25,12 @@ A leaderboard will display the number of correct guesses by each player after th
 - **Shared Memory**: For progress in the game (hangman, letters unlocked, incorrect letters found)
 - **Sockets**: For communicating between the server and clients
 
+### Data structures / Algorithms:
+- Ncurses
+	- On debian: sudo apt install libncurses5-dev libncursesw5-dev
+	- On other systems google: "install ncurses (platform)" and follow instructions that look somewhat trustworthy 
+
+
 ### Work Distribution:
 - Basic guessing system (Hebe, Macy)
 - Create a switch that includes Ascii art for each step of the hangman’s formation (Macy)
