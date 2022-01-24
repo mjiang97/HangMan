@@ -13,16 +13,28 @@
 
 #include "hangmen.h"
 
-int main(){
+int main() {
 
-  // initscr();			/* Start curses mode 		  */
-	// printw("Hello World !!!!!");	/* Print Hello World		  */
-	// refresh();			/* Print it on to the real screen */
-	// getch();			/* Wait for user input */
-	// endwin();			/* End curses mode		  */
+  initscr();			/* Start curses mode 		  */
+  cbreak();
+  noecho();
+  start_color();
+  init_pair(1, COLOR_BLACK, COLOR_BLACK);
+  mvaddstr(10, 10, "_|    _|    _|_|    _|      _|    _|_|_|  _|      _|    _|_|    _|      _|");
+  mvaddstr(11, 10, "_|    _|  _|    _|  _|_|    _|  _|        _|_|  _|_|  _|    _|  _|_|    _|");
+  mvaddstr(12, 10, "_|_|_|_|  _|_|_|_|  _|  _|  _|  _|  _|_|  _|  _|  _|  _|_|_|_|  _|  _|  _|");
+  mvaddstr(13, 10, "_|    _|  _|    _|  _|    _|_|  _|    _|  _|      _|  _|    _|  _|    _|_|");
+  mvaddstr(14, 10, "_|    _|  _|    _|  _|      _|    _|_|_|  _|      _|  _|    _|  _|      _|");
+  mvaddstr(16, 35, "press any key to start");
+  refresh();
+  keypad(stdscr, TRUE);	
+  int ch = getch();	
+  if(ch == ' ');
+	  clear();
+  refresh();
+  getch();
+  refresh();
 
-
-  // Gets a noun from common nouns list
   int in = open("nouns.csv", O_RDONLY);
 
   struct stat st;
@@ -50,8 +62,6 @@ int main(){
     nounInd++;
   }
 
-
-
   // Setup 
   int failedAttempts = 0;
 
@@ -60,26 +70,25 @@ int main(){
   char * noun = nounsArr[x];
   int ansLength = strlen(noun);
   char guess[ansLength+1];
-  for(i=0; i<ansLength; i++){ guess[i] = '_'; }
+  for(i=0; i<ansLength; i++){ 
+    guess[i] = '_'; 
+  }
   guess[ansLength] = '\0';
 
-
-
-
-  // Actual Game
-  printf("\nWELCOME TO HANGMAN :D\n");
-  for(i=0; i<ansLength; i++){ printf("%c ", noun[i]); }
-  printf("\n");
-  printf("\n");
-  
+  refresh();	
+  for(i=0; i<ansLength; i++){ printw("%c ", noun[i]); }
+  printw("\n");
+  printw("\n");
+  refresh();	
   char input[100];
 
   while(1){
     //Print the hangman so far
-    printf("\n\n\n\n\n%s\n\n", levelOneHM[failedAttempts]);
+    printw("\n\n\n\n\n%s\n\n", levelOneHM[failedAttempts]);
     // Print the guess so far
-    for(i=0; i<ansLength; i++){ printf("%c ", guess[i]); }
-    printf("\n");
+    for(i=0; i<ansLength; i++){ printw("%c ", guess[i]); }
+    printw("\n");
+    refresh();
 
     char userLetter = '_';
     // Get input, check if valid
@@ -136,6 +145,6 @@ int main(){
 
 
   }
-
+  endwin();			/* End curses mode		  */
   return 0;
 }
