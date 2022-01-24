@@ -1,0 +1,18 @@
+Hebe: 01-23-22 - 01-24-22
+  - Added sockets and forking to make hangman work between server and client
+  - Doesn't work with ncurses
+
+Macy: 01-23-22
+  - Worked on ncurses
+
+Hebe: 01-23-22
+  - Implemented single player hangman
+
+Hebe: 01-21-22
+  - Worked on opening and reading the nouns.csv file
+
+Hebe: 01-12-22
+  - Created basic files, tried to use ncurses
+
+Hebe and Macy: 01-11-22 - 01-12-22
+  - Created project proposal
