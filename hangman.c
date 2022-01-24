@@ -18,9 +18,9 @@
 #include "networking.h"
 
 void playGame(char* noun, int client){
-  // Setup 
+  // Setup
   int failedAttempts = 0;
-  
+
   int ansLength = strlen(noun);
   char guess[ansLength+1];
   int i;
@@ -33,17 +33,17 @@ void playGame(char* noun, int client){
   for(i=0; i<ansLength; i++){ printf("%c ", noun[i]); }
 
   char to_client[10000];
-  
+
   while(1){
     to_client[0] = '\0';
     // the hangman so far
     strcat(to_client, "\n\n\n\n\n");
     strcat(to_client, levelOneHM[failedAttempts]);
     strcat(to_client, "\n\n");
-    
+
     //  the guess so far
     char tmp[ansLength*2];
-    for(i=0; i<=ansLength*2; i+=2){ 
+    for(i=0; i<=ansLength*2; i+=2){
       tmp[i] = guess[i/2];
       tmp[i+1] = ' ';
     }
@@ -51,7 +51,7 @@ void playGame(char* noun, int client){
     strcat(to_client, "\ntest\n");
      printf("tmp: %stmp\n", tmp);
      printf("tmplen2: %lu\n", strlen(tmp));
-    
+
     if(write(client, to_client, strlen(to_client)) == -1){
       printf("Error: %s", strerror(errno));
     }
@@ -61,11 +61,11 @@ void playGame(char* noun, int client){
     char userLetter;
     if(read(client, to_client, 100) == -1){
       printf("Error: %s", strerror(errno));
-    } 
+    }
     userLetter = to_client[0];
     printf("letter guess: %c\n", userLetter);
     to_client[0] = '\0';
-    
+
     // Fill in letter if correct
     int isCorrect = 0;
     for(i=0; i<ansLength; i++){
@@ -112,7 +112,7 @@ void playGame(char* noun, int client){
         printf("Error: %s", strerror(errno));
       }
     }
-    
+
 
     else{
       strcpy(to_client, "Correct!\n");
@@ -155,6 +155,7 @@ char* generate(){
   srand(time(NULL));
   int x = rand()%TOTALNOUNS;
   char * noun = nounsArr[x];
+  return noun;
 }
 
 
