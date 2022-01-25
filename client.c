@@ -20,7 +20,7 @@
 
 int main(){
 
-  
+
   // initscr();			/* Start curses mode 		  */
   // cbreak();
   // noecho();
@@ -33,7 +33,7 @@ int main(){
   // mvaddstr(14, 10, "_|    _|  _|    _|  _|      _|    _|_|_|  _|      _|  _|    _|  _|      _|");
   // mvaddstr(16, 35, "press any key to start");
   // refresh();
-  // keypad(stdscr, TRUE);	
+  // keypad(stdscr, TRUE);
 
 
 
@@ -43,14 +43,21 @@ int main(){
   char input[100];
   char from_server[10000];
 
+  // Welcome message
+  if(read(sd, from_server, sizeof(from_server)) == -1){
+    printf("Error: %s", strerror(errno));
+  }
+  printf("%s\n", from_server);
+
   while(1){
     if(read(sd, from_server, sizeof(from_server)) == -1){
       printf("Error: %s", strerror(errno));
     }
+    
     printf("%s\n", from_server);
     char userLetter = '_';
     while (userLetter == '_') {
-      printf("Enter your one letter guess: ");
+      printf("\nEnter your one letter guess: ");
       fgets(input, 100, stdin);
       if(strlen(input) != 2){
         printf("Please enter one (1) letter\n");
@@ -75,8 +82,15 @@ int main(){
     }
     printf("%s\n", from_server);
 
+    char tmp[10];
+    strncpy(tmp, from_server + strlen(from_server) - 10, sizeof(tmp));
+    printf("%s\n", tmp);
+    if(!strcmp(tmp, "Game over\n")){
+	exit(0);
+    }
+
   }
-  
+
 
   return 0;
 }

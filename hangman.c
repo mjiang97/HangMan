@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <ncurses.h>
+#include <signal.h>
 
 #define TOTALNOUNS 985
 
@@ -26,18 +27,24 @@ void playGame(char* noun, int client){
   int i;
   for(i=0; i<ansLength; i++){ guess[i] = '_'; }
   guess[ansLength] = '\0';
-  char input[100];
+  char to_client[10000];
 
   // Actual Game
-  printf("\nWELCOME TO HANGMAN :D\n");
-  for(i=0; i<ansLength; i++){ printf("%c ", noun[i]); }
+  strcpy(to_client, "\nWELCOME TO HANGMAN :D\n");
+  if(write(client, to_client, 10000) == -1){
+    printf("Error: %s", strerror(errno));
+  }
 
-  char to_client[10000];
+  // Server prints answer
+  printf("\nGame started. Answer: ");
+  for(i=0; i<ansLength; i++){ printf("%c ", noun[i]); }
+  printf("\n");
+
 
   while(1){
     to_client[0] = '\0';
     // the hangman so far
-    strcat(to_client, "\n\n\n\n\n");
+    strcat(to_client, "\n");
     strcat(to_client, levelOneHM[failedAttempts]);
     strcat(to_client, "\n\n");
 
@@ -48,9 +55,8 @@ void playGame(char* noun, int client){
       tmp[i+1] = ' ';
     }
     strcat(to_client, tmp);
-    strcat(to_client, "\ntest\n");
-     printf("tmp: %stmp\n", tmp);
-     printf("tmplen2: %lu\n", strlen(tmp));
+    // printf("tmp: %stmp\n", tmp);
+    // printf("tmplen2: %lu\n", strlen(tmp));
 
     if(write(client, to_client, strlen(to_client)) == -1){
       printf("Error: %s", strerror(errno));
@@ -85,11 +91,11 @@ void playGame(char* noun, int client){
     }
     // If all letters are filled in, user wins
     if(didyouwin){
-      strcpy(to_client, "You win! Thanks for playing :)\n");
+      strcpy(to_client, "You win! Thanks for playing :)\nGame Over\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
-      break;
+      exit(0);
     }
 
     else if(!isCorrect){
@@ -100,14 +106,13 @@ void playGame(char* noun, int client){
         strcat(to_client, levelOneHM[failedAttempts]);
         strcat(to_client, "\n\nYou lost! The answer was ");
         strcat(to_client, noun);
-        strcat(to_client, ". Better luck next time...\n");
-        strcat(to_client, levelOneHM[failedAttempts]);
+        strcat(to_client, ". Better luck next time...\nGame over\n");
         if(write(client, to_client, 10000) == -1){
           printf("Error: %s", strerror(errno));
         }
-        break;
+        exit(0);
       }
-      strcpy(to_client, "Incorrect! try again\n");
+      strcpy(to_client, "\n\n\n\n\nIncorrect! Try again\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
@@ -115,14 +120,16 @@ void playGame(char* noun, int client){
 
 
     else{
-      strcpy(to_client, "Correct!\n");
+      strcpy(to_client, "\n\n\n\n\nCorrect!\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
     }
     printf("failed: %d\n", failedAttempts);
+    printf("guess so far: %s\n", guess);
   }
 }
+
 
 
 
@@ -157,6 +164,7 @@ char* generate(){
   char * noun = nounsArr[x];
   return noun;
 }
+
 
 
 int main(){
