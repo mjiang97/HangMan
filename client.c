@@ -33,6 +33,12 @@ int main(){
   char ip[200];
   printf("Enter IP address of server: ");
 	fgets(ip, sizeof(ip), stdin);
+  printf("IP%sIP\n", ip);
+  int n;
+  for(n=0; n<strlen(ip); n++){
+    if(ip[n] == '\n')
+      ip[n] = '\0';
+  }
   sd = client_connect(ip);
 
   signal(SIGINT, sighandler);
