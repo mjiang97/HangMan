@@ -13,7 +13,7 @@ static void sighandler(int signo) {
 
 
 int main(){
-  
+
 
   // initscr();			/* Start curses mode 		  */
   // cbreak();
@@ -31,9 +31,9 @@ int main(){
 
 
   char ip[200];
-  printf("Enter IP address of server: ");
+  printf("Enter IP address of server (empty for localhost): ");
 	fgets(ip, sizeof(ip), stdin);
-  printf("IP%sIP\n", ip);
+  // printf("IP%sIP\n", ip);
   int n;
   for(n=0; n<strlen(ip); n++){
     if(ip[n] == '\n')
@@ -56,7 +56,7 @@ int main(){
     if(read(sd, from_server, sizeof(from_server)) == -1){
       printf("Error: %s", strerror(errno));
     }
-    
+
     printf("%s\n", from_server);
     char userLetter = '_';
     while (userLetter == '_') {
@@ -85,11 +85,11 @@ int main(){
     }
     printf("%s\n", from_server);
 
-    char tmp[10];
-    strncpy(tmp, from_server + strlen(from_server) - 10, sizeof(tmp));
-    printf("%s\n", tmp);
-    if(!strcmp(tmp, "Game over\n")){
-	exit(0);
+    char tmp[11];
+    strcpy(tmp, from_server + strlen(from_server) - 10);
+    if(!strcmp(tmp, "Game Over\n")){
+	     close(sd);
+       exit(0);
     }
 
   }

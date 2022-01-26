@@ -30,13 +30,13 @@ void playGame(char* noun, int client){
   char to_client[10000];
 
   // Actual Game
-  strcpy(to_client, "\nWELCOME TO HANGMAN :D\nEnter your guesses below.\nPress CTRL+C to quit.\n");
+  strcpy(to_client, "\nWELCOME TO HANGMAN :D\n\nEnter your guesses below.\nPress CTRL+C to quit.\n");
   if(write(client, to_client, 10000) == -1){
     printf("Error: %s", strerror(errno));
   }
 
   // Server prints answer
-  printf("\nGame started. Answer: ");
+  printf("\n\nGame started. Answer: ");
   for(i=0; i<ansLength; i++){ printf("%c ", noun[i]); }
   printf("\n");
 
@@ -91,7 +91,7 @@ void playGame(char* noun, int client){
     }
     // If all letters are filled in, user wins
     if(didyouwin){
-      strcpy(to_client, "You win! Thanks for playing :)\nGame Over\n");
+      strcpy(to_client, "\n\nYou win! Thanks for playing :)\nGame Over\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
@@ -106,7 +106,7 @@ void playGame(char* noun, int client){
         strcat(to_client, levelOneHM[failedAttempts]);
         strcat(to_client, "\n\nYou lost! The answer was ");
         strcat(to_client, noun);
-        strcat(to_client, ". Better luck next time...\nGame over\n");
+        strcat(to_client, ". Better luck next time...\nGame Over\n");
         if(write(client, to_client, 10000) == -1){
           printf("Error: %s", strerror(errno));
         }
