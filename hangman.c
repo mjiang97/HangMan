@@ -30,7 +30,7 @@ void playGame(char* noun, int client){
   char to_client[10000];
 
   // Actual Game
-  strcpy(to_client, "\nWELCOME TO HANGMAN :D\n");
+  strcpy(to_client, "\nWELCOME TO HANGMAN :D\nEnter your guesses below.\nPress CTRL+C to quit.\n");
   if(write(client, to_client, 10000) == -1){
     printf("Error: %s", strerror(errno));
   }
