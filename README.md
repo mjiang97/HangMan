@@ -21,6 +21,15 @@ HangMan is a collaborative multiplayer word-guessing game. Work with other playe
 using `./server` and `./client`
 - press ctrl-c to exit the server or client
 
+## Known Bugs
+- During some turns the hangman and/or the word progress will not show up
+- During some turns there will be extra characters or underscores after the word progress
+- We tried to implement ncurses but did not get it to work
+
+## Features that could be implemented in the future
+- Getting the game to work for multiple players
+- Setting up a leaderboard
+
 ## Timeline:
 - 1/13-1/15: 
 	- Work on HangMan for single player
