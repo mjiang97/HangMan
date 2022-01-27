@@ -4,12 +4,6 @@ By: **H**ebe Huang and **M**acy Jiang pd 4
 ## Project Description:
 HangMan is a collaborative multiplayer word-guessing game. Work with other players to guess one letter at a time and try to beat the game before the man gets hanged! 
 
-## Required Libraries:
-- ncurses
-	- On debian: `sudo apt install libncurses5-dev libncursesw5-dev`
-	- On other systems google: "install ncurses (platform)" and follow instructions on reliable sites
-	- Or use: `brew install ncurses`
-
 ## How to Run the Game:
 - Clone this repository
 `git clone https://github.com/mjiang97/HangMan`
@@ -27,8 +21,9 @@ using `./server` and `./client`
 - We tried to implement ncurses but did not get it to work
 
 ## Features that could be implemented in the future
-- Getting the game to work for multiple players
+- Getting the game to work for multiple players for the same game/word
 - Setting up a leaderboard
+- Include the alphabet and show which letters have been guessed and were incorrect/correct
 
 ## Timeline:
 - 1/13-1/15: 
