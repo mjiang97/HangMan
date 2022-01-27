@@ -31,7 +31,7 @@ int main(){
 
 
   char ip[200];
-  printf("Enter IP address of server (empty for localhost): ");
+  printf("\033[0;36mEnter IP address of server (empty for localhost):\033[0m ");
 	fgets(ip, sizeof(ip), stdin);
   // printf("IP%sIP\n", ip);
   int n;
@@ -60,14 +60,15 @@ int main(){
     printf("%s\n", from_server);
     char userLetter = '_';
     while (userLetter == '_') {
-      printf("\nEnter your one letter guess: ");
+      printf("\n\033[0;36mEnter your one letter guess:\033[0;33m ");
       fgets(input, 100, stdin);
+      printf("\033[0m");
       if(strlen(input) != 2){
-        printf("Please enter one (1) letter\n");
+        printf("\033[0;36mPlease enter one (1) letter\n");
         continue;
       }
       if((input[0] < 'A' || input[0] > 'Z') && (input[0] < 'a' || input[0] > 'z')){
-        printf("Please enter a letter\n");
+        printf("\033[0;36mPlease enter a letter\n");
         continue;
       }
       userLetter = input[0];
@@ -85,12 +86,11 @@ int main(){
     }
     printf("%s\n", from_server);
 
-    // char tmp[11];
-    // strcpy(tmp, from_server + strlen(from_server) - 10);
-    // if(!strcmp(tmp, "Game Over\n")){
-	  //    close(sd);
-    //    exit(0);
-    // }
+
+    if(!strcmp(from_server + strlen(from_server) - 10, "Game Over\n")){
+	     close(sd);
+       exit(0);
+    }
 
   }
 

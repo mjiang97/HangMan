@@ -30,7 +30,7 @@ void playGame(char* noun, int client){
   char to_client[10000];
 
   // Actual Game
-  strcpy(to_client, "\nWELCOME TO HANGMAN :D\n\nEnter your guesses below.\nPress CTRL+C to quit.\n");
+  strcpy(to_client, "\n\033[1;36mWELCOME TO HANGMAN :D\033[0;35m\n\nEnter your guesses below.\nPress CTRL+C to quit.\033[0m\n");
   if(write(client, to_client, 10000) == -1){
     printf("Error: %s", strerror(errno));
   }
@@ -112,7 +112,7 @@ void playGame(char* noun, int client){
         }
         exit(0);
       }
-      strcpy(to_client, "\n\n\n\n\nIncorrect! Try again\n");
+      strcpy(to_client, "\n\n\n\n\n\033[1;31mIncorrect! Try again\033[0m\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
@@ -120,7 +120,7 @@ void playGame(char* noun, int client){
 
 
     else{
-      strcpy(to_client, "\n\n\n\n\nCorrect!\n");
+      strcpy(to_client, "\n\n\n\n\n\033[1;32mCorrect!\033[0m\n");
       if(write(client, to_client, 10000) == -1){
         printf("Error: %s", strerror(errno));
       }
