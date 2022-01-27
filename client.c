@@ -85,12 +85,12 @@ int main(){
     }
     printf("%s\n", from_server);
 
-    char tmp[11];
-    strcpy(tmp, from_server + strlen(from_server) - 10);
-    if(!strcmp(tmp, "Game Over\n")){
-	     close(sd);
-       exit(0);
-    }
+    // char tmp[11];
+    // strcpy(tmp, from_server + strlen(from_server) - 10);
+    // if(!strcmp(tmp, "Game Over\n")){
+	  //    close(sd);
+    //    exit(0);
+    // }
 
   }
 
