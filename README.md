@@ -11,7 +11,7 @@ HangMan is a collaborative multiplayer word-guessing game. Work with other playe
 `cd HangMan`
 - Use make to compile
 `make`
-- Open two or more terminal windows and run the server and client(s)
+- Open two or more terminal windows and run the server and client
 using `./server` and `./client`
 - press ctrl-c to exit the server or client
 
