@@ -51,7 +51,6 @@ int client_connect(char * ip){
   hints = calloc(1,sizeof(struct addrinfo));
   hints->ai_family = AF_INET;
   hints->ai_socktype = SOCK_STREAM; //TCP socket
-  hints->ai_flags = AI_PASSIVE; //only needed on server
   getaddrinfo(ip, "9845", hints, &results);  //Server sets node to NULL
 
   //create socket
